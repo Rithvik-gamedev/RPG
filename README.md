@@ -171,7 +171,7 @@ RPG/
 git lfs install
 
 # Clone the repository
-git clone https://github.com/Rithvik-gamedev/Open-World-RPG.git
+git clone https://github.com/Rithvik-gamedev/RPG.git
 cd Open-World-RPG
 ```
 
@@ -197,10 +197,11 @@ cd Open-World-RPG
 | Look | Mouse |
 | Jump | Space |
 | Attack | Left Mouse Button |
-| Dodge | Left Shift |
+| Dodge | R, Right Mouse Button|
 | Interact / Pick Up | E |
-| Drop Weapon | R |
-| Equip / Unequip | E (while no item overlapping) |
+| Drop Weapon | G (Hold) |
+| Equip / Unequip | E |
+| Lock On Enemy | F |
 
 ---
 
