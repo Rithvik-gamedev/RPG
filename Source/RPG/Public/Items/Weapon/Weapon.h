@@ -36,7 +36,7 @@ protected:
 	//void OnBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void CreateFieldSystemBreakObjects(const FVector& FieldLocation);
+	void CreateFieldSystemBreakObjects(const FVector& FieldLocation, AActor* HitActor);
 
 	/***************************************************/
 
@@ -51,6 +51,7 @@ public:
 
 	void AttachMeshToSocket(USceneComponent* InParent, const FName& InSocket);
 
+	UPROPERTY()
 	TArray<AActor*> IgnoreActors;
 
 private:

@@ -62,7 +62,7 @@ void AWeapon::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 
 		UGameplayStatics::ApplyDamage(HitResult.GetActor(), WeaponDamage, GetInstigatorController(), this, UDamageType::StaticClass());
 		ExecuteGetHit(HitResult);
-		CreateFieldSystemBreakObjects(HitResult.ImpactPoint);
+		CreateFieldSystemBreakObjects(HitResult.ImpactPoint, HitResult.GetActor());
 	}
 }
 
