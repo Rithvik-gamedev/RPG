@@ -1,12 +1,12 @@
 # Open World RPG
 
-> An action RPG built with **Unreal Engine 5.4** featuring fluid combat, AI-driven enemies, an open-world landscape, and a dungeon environment — crafted entirely in C++ and Blueprints.
+> Third-person action RPG built in **Unreal Engine 5.4** with C++ and Blueprints. Open-world landscape, dungeon level, AI enemies, and stamina-based combat.
 
 ---
 
 ## Overview
 
-**Open World RPG** is a third-person action role-playing game developed from the ground up in Unreal Engine 5.4. The project showcases advanced gameplay systems including directional hit reactions, stamina-based combat, AI state machines, physics-driven destructibles, and a rich open-world environment built with Landmass and Water plugins.
+**Open World RPG** is a third-person action RPG in Unreal Engine 5.4, written in C++. It covers stamina-based combat with directional hit reactions, behavior tree AI enemies, Chaos physics destructibles, and an open-world landscape built with the Landmass and Water plugins.
 
 ---
 
@@ -14,10 +14,10 @@
 
 ### Player Character System
 - **Full C++ character controller** (`ARPG_Character`) built on a shared `ABaseCharacter` base class
-- **Enhanced Input System (EIS)** — modern input action/mapping context pipeline for movement, look, jump, attack, dodge, and interact
-- **Groom Hair System** — real-time strand-based hair simulation via Unreal's `UGroomComponent` (requires HairStrands & AlembicHairImporter plugins)
-- **Weapon equip states** — supports one-handed and two-handed weapon modes with distinct equip/unequip animation montages
-- **Weapon drop & pickup** — weapons can be dropped and picked up dynamically via sphere overlap detection
+- **Enhanced Input System (EIS)** — input action/mapping context pipeline for movement, look, jump, attack, dodge, and interact
+- **Groom Hair System** — real-time strand-based hair simulation via `UGroomComponent` (requires HairStrands & AlembicHairImporter plugins)
+- **Weapon equip states** — supports one-handed and two-handed weapon modes with separate equip/unequip animation montages
+- **Weapon drop & pickup** — weapons can be dropped and picked up at runtime via sphere overlap detection
 - **Motion Warping** — attack animations use translation & rotation warp targets for precise positional alignment
 
 ### Combat System
@@ -31,53 +31,49 @@
 - **Configurable weapon damage** exposed per weapon Blueprint
 
 ### Enemy AI
-Three fully implemented enemy archetypes, each with their own AnimBP and montage sets:
+Three enemy archetypes, each with their own AnimBP and montage sets:
 
 | Enemy Type | Description |
 |---|---|
 | **SK_Knight** | Armored melee fighter with patrol and combat AI |
-| **Raptor** | Fast creature enemy with dedicated attack, death, and hit-react montages |
+| **Raptor** | Fast creature with dedicated attack, death, and hit-react montages |
 | **Insect** | Creature enemy with blend-space idle/walk locomotion |
 
-Each enemy features:
+Each enemy includes:
 - **State machine AI** — Patrolling → Chasing → Attacking → Dead (managed via `EEnemyState` enum)
 - **PawnSensing** — detects the player within a configurable sight range; triggers chase and combat
 - **Patrol system** — waypoint-based patrol with randomized wait timers between points
-- **Dynamic health bars** — world-space `UHealthBarComponent` shown on aggro, hidden when out of combat
+- **World-space health bars** — `UHealthBarComponent` shown on aggro, hidden when out of combat
 - **Soul spawning on death** — enemies drop collectible soul pickups
 - **Auto weapon spawning** — enemies spawn their own weapon at runtime
-- **Configurable radii** — patrol radius, attack radius, combat radius, acceptance radius all tunable in the editor
+- **Configurable radii** — patrol, attack, combat, and acceptance radius all tunable in the editor
 
 ### Item & Pickup System
 - **Base `AItem` class** with sphere overlap logic and shimmer/levitation effects
 - **Weapons** — equippable with one-handed and two-handed variants (Greatsword, Knight Sword, etc.)
 - **Soul Pickups** — drift upward on spawn and award souls on player contact
-- **Treasure Pickups** — 8 unique treasure types (Bracelet, Goblet, Gold Bar, Sapphire, Ruby, Emerald, Diamond, Small Bracelet) award gold on pickup
+- **Treasure Pickups** — 8 types (Bracelet, Goblet, Gold Bar, Sapphire, Ruby, Emerald, Diamond, Small Bracelet) that award gold on pickup
 - **Health Pickups** — restore player health on contact with custom VFX material and sound
 
 ### Attribute System
-`UAttributes` — a reusable `UActorComponent` driving all character stats:
+`UAttributes` — a `UActorComponent` driving all character stats:
 - **Health** (current + max) with `ReceiveDamage()`
 - **Stamina** (current + max) with `UseStamina()` and `RegenStamina()`
 - **Gold** — accumulated from treasure pickups
 - **Souls** — accumulated from enemy soul drops
 
 ### HUD & UI
-- **`WBP_PlayerOverlay`** — in-game HUD with:
-  - Health progress bar
-  - Stamina progress bar
-  - Gold counter
-  - Souls counter
+- **`WBP_PlayerOverlay`** — in-game HUD with health bar, stamina bar, gold counter, and souls counter
 - **`BP_HealthBar`** — world-space enemy health bar widget component
 - **Lock-on target reticle** (`WBP_LockOnTarget`) with configurable lock-on distance
-- HUD is initialized via `ASlashHUD` and bound to the player controller on `BeginPlay`
+- HUD initialized via `ASlashHUD` and bound to the player controller on `BeginPlay`
 
 ### World & Levels
 Three playable maps:
 
 | Map | Description |
 |---|---|
-| **Land** | Large open-world landscape (~55 MB) built with the Landmass plugin, featuring terrain sculpting, foliage, water bodies (Water + WaterExtras plugins), and precomputed lighting |
+| **Land** | Open-world landscape (~55 MB) built with the Landmass plugin — terrain sculpting, foliage, water bodies (Water + WaterExtras plugins), and precomputed lighting |
 | **Dungeon** | Interior dungeon level using the Medieval Dungeon asset pack with procedural room layout via `BPP_Dungeon` |
 | **Slash** | Prototype/test level for combat iteration |
 
@@ -93,7 +89,7 @@ Three playable maps:
 | `ModelingToolsEditorMode` | In-editor mesh modeling |
 
 ### Animation
-- **Motion Matching** — Echo character uses `PSD_EchoMM` pose search database (`PSS_Echo`) for responsive, data-driven locomotion
+- **Motion Matching** — Echo character uses `PSD_EchoMM` pose search database (`PSS_Echo`) for data-driven locomotion
 - **ABP_EchoMainState** — main state machine animation blueprint for the player character
 - **ABP_Echo_IK** — IK pass animation blueprint for foot/hand IK
 - **ABP_SlashCharacter** — legacy slash character animation blueprint
@@ -155,10 +151,11 @@ RPG/
 |---|---|
 | Unreal Engine | **5.4** |
 | Visual Studio | 2022 (with C++ Game Development workload) |
+| Jetbrains Rider| Open `RPG.uproject` with Rider |
 | Git LFS | Required for large binary assets |
 | OS | Windows 10/11 (64-bit) |
 
-> **Note:** Git LFS is required. This project tracks binary assets (`.uasset`, `.umap`, etc.) via Git LFS. Make sure LFS is installed before cloning.
+> **Note:** Git LFS is required. This project tracks binary assets (`.uasset`, `.umap`, etc.) via Git LFS. Install it before cloning.
 
 ---
 
@@ -184,8 +181,8 @@ cd Open-World-RPG
 
 ### First Run
 
-- Open any of the maps in `Content/Maps/` (`Land.umap` for the open world, `Dungeon.umap` for the interior level)
-- Press **Play** in the editor to start
+- Open any map in `Content/Maps/` (`Land.umap` for the open world, `Dungeon.umap` for the interior)
+- Press **Play** to start
 
 ---
 
@@ -197,7 +194,7 @@ cd Open-World-RPG
 | Look | Mouse |
 | Jump | Space |
 | Attack | Left Mouse Button |
-| Dodge | R, Right Mouse Button|
+| Dodge | R / Right Mouse Button |
 | Interact / Pick Up | E |
 | Drop Weapon | G (Hold) |
 | Equip / Unequip | E |
